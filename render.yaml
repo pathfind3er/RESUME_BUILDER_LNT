@@ -12,10 +12,7 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: WEB_ORIGIN
-        fromService:
-          type: web
-          name: folio-resume-web-2026
-          envVarKey: RENDER_EXTERNAL_URL
+        value: https://folio-resume-web-2026.onrender.com
 
   - type: web
     name: folio-resume-web-2026
