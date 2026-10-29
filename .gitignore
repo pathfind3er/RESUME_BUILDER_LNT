@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env.local
+backend/target/
+backend/.m2/
+backend/settings.xml
+

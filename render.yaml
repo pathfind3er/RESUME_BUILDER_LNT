@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: folio-resume-api-2026
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: WEB_ORIGIN
+        fromService:
+          type: web
+          name: folio-resume-web-2026
+          envVarKey: RENDER_EXTERNAL_URL
+
+  - type: web
+    name: folio-resume-web-2026
+    runtime: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://folio-resume-api-2026.onrender.com
+
